@@ -1,0 +1,21 @@
+{
+  "name": "basic-ds",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kevinb7/basic-ds",
+  "authors": [
+    "Kevin Barabash <kevinb7@gmail.com>"
+  ],
+  "description": "Basic data structures for JavaScript",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "mocha": "~2.0.1",
+    "expect": "~0.3.1"
+  }
+}
