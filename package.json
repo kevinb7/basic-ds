@@ -1,0 +1,22 @@
+{
+  "name": "basic-ds",
+  "version": "0.0.1",
+  "description": "Basic data structures for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinb7/basic-ds.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinb7/basic-ds/issues"
+  },
+  "homepage": "https://github.com/kevinb7/basic-ds",
+  "devDependencies": {
+    "gulp-browserify": "^0.5.0"
+  }
+}

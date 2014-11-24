@@ -1,24 +1,16 @@
-(function (exports) {
+import ListNode = require("ListNode");
 
-    function Node (value) {
-        this.value = value;
-        this.next = null;
-        this.prev = null;
-    }
+class LinkedList<T> {
+    first: ListNode<T>;
+    last: ListNode<T>;
 
-    Node.prototype.destroy = function () {
-        delete this.next;
-        delete this.prev;
-        delete this.value;
-    };
-
-    function LinkedList () {
+    constructor() {
         this.first = null;
         this.last = null;
     }
 
-    LinkedList.prototype.push_back = function (value) {
-        var node = new Node(value);
+    push_back(value: T) {
+        var node = new ListNode(value);
         if (this.first === null && this.last === null) {
             this.first = node;
             this.last = node;
@@ -27,10 +19,10 @@
             this.last.next = node;
             this.last = node;
         }
-    };
+    }
 
-    LinkedList.prototype.push_front = function (value) {
-        var node = new Node(value);
+    push_front(value: T) {
+        var node = new ListNode<T>(value);
         if (this.first === null && this.last === null) {
             this.first = node;
             this.last = node;
@@ -39,9 +31,9 @@
             this.first.prev = node;
             this.first = node;
         }
-    };
+    }
 
-    LinkedList.prototype.pop_back = function () {
+    pop_back() {
         if (this.last) {
             var value = this.last.value;
             if (this.last.prev) {
@@ -57,9 +49,9 @@
         } else {
             return null;
         }
-    };
+    }
 
-    LinkedList.prototype.pop_front = function () {
+    pop_front() {
         if (this.first) {
             var value = this.first.value;
             if (this.first.next) {
@@ -75,23 +67,23 @@
         } else {
             return null;
         }
-    };
+    }
 
-    LinkedList.prototype.clear = function () {
+    clear() {
         this.first = this.last = null;
-    };
+    }
 
-    LinkedList.prototype.insertBeforeNode = function (refNode, value) {
+    insertBeforeNode(refNode: ListNode<T>, value: T) {
         if (refNode === this.first) {
             this.push_front(value);
         } else {
-            var node = new Node(value);
+            var node = new ListNode<T>(value);
             node.prev = refNode.prev;
             node.next = refNode;
             refNode.prev.next = node;
             refNode.prev = node;
         }
-    };
+    }
 
     // TODO: finish this
 //    LinkedList.prototype.inserAfterNode = function (refNode, value) {
@@ -102,22 +94,22 @@
 //        }
 //    };
 
-    LinkedList.prototype.forEachNode = function (callback, _this) {
+    forEachNode(callback: (value: ListNode<T>) => void, _this?) {
         var node = this.first;
         while (node !== null) {
             callback.call(_this, node);
             node = node.next;
         }
-    };
+    }
 
     // TODO: provide the index to the callback as well
-    LinkedList.prototype.forEach = function (callback, _this) {
+    forEach(callback: (value: ListNode<T>) => void, _this?) {
         this.forEachNode(function (node) {
             callback.call(_this, node.value);
-        });
-    };
+        }, _this);
+    }
 
-    LinkedList.prototype.nodeAtIndex = function (index) {
+    nodeAtIndex(index: number) {
         var i = 0;
         var node = this.first;
         while (node !== null) {
@@ -127,31 +119,30 @@
             i++;
         }
         return null;
-    };
+    }
 
-    LinkedList.prototype.valueAtIndex = function (index) {
+    valueAtIndex(index: number) {
         var node = this.nodeAtIndex(index);
         return node ? node.value : undefined;
-    };
+    }
 
-    LinkedList.prototype.toArray = function () {
-        var array = [];
+    toArray() {
+        var array:T[] = [];
         var node = this.first;
         while (node !== null) {
             array.push(node.value);
             node = node.next;
         }
         return array;
-    };
+    }
 
-    LinkedList.fromArray = function (array) {
-        var list = new LinkedList();
+    static fromArray<U> (array: U[]) {
+        var list = new LinkedList<U>();
         array.forEach(function (value) {
             list.push_back(value);
         });
         return list;
-    };
+    }
+}
 
-    exports.LinkedList = LinkedList;
-
-})(this);
+export = LinkedList;
