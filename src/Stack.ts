@@ -25,7 +25,7 @@ class Stack<T> {
         return this.items[this.items.length - 1];
     }
 
-    size() {
+    get size() {
         return this.items.length;
     }
 
