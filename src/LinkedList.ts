@@ -1,4 +1,4 @@
-import ListNode = require("ListNode");
+import ListNode = require("./ListNode");
 
 class LinkedList<T> {
     first: ListNode<T>;

@@ -1,46 +1,31 @@
-var gulp = require("gulp");
-var typescript = require('gulp-tsc');
-var browserify = require("gulp-browserify");
+var gulp = require('gulp');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var tsc = require("gulp-tsc");
 
-process.env.NODE_PATH = "./temp";
+function buildBrowser(sourceFile, outputName, outputLocation) {
+    return browserify({ extensions: ['.ts'], standalone: outputName })
+        .plugin('tsify', { target: 'ES5', removeComments: true })
+        .add(sourceFile)
+        .bundle()
+        .pipe(source(outputName + '.js'))
+        .pipe(gulp.dest(outputLocation));
+}
 
-var names = [
-    "LinkedList", "Stack"
-];
+function buildNode(sourceFile, outputLocation) {
+    gulp.src(sourceFile)
+      .pipe(tsc({ target: 'ES5', removeComments: true }))
+      .pipe(gulp.dest(outputLocation))
+}
 
-names.forEach(function(name) {
-    gulp.task("compile-" + name, function() {
-        var filename = "src/" + name + ".ts";
-
-        return gulp.src(filename)
-            .pipe(typescript({
-                target: "ES5",
-                module: "commonjs"
-            }))
-            .pipe(gulp.dest('temp/'))
-    });
+gulp.task("build-browser", function () {
+    buildBrowser('./src/LinkedList.ts', "LinkedList", "./dist");
+    buildBrowser('./src/Stack.ts', "Stack", "./dist");
 });
 
-names.forEach(function(name) {
-    gulp.task("browserify-" + name, function() {
-        var filename = "temp/" + name + ".js";
-
-        return gulp.src(filename)
-            .pipe(browserify({
-                standalone: name
-            }))
-            .pipe(gulp.dest("dist/"));
-    });
+gulp.task("build-node", function () {
+    buildNode("./src/LinkedList.ts", "./lib");
+    buildNode("./src/Stack.ts", "./lib");
 });
 
-var compileTasks = names.map(function (name) {
-    return "compile-" + name;
-});
-
-var browserifyTasks = names.map(function (name) {
-    return "browserify-" + name;
-});
-
-gulp.task("compile", compileTasks);
-
-gulp.task("browserify", browserifyTasks);
+gulp.task("default", ["build-node", "build-browser"]);

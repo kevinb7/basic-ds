@@ -17,5 +17,11 @@
   "devDependencies": {
     "mocha": "~2.0.1",
     "expect": "~0.3.1"
-  }
+  },
+  "keywords": [
+    "data structure",
+    "basic",
+    "stack",
+    "linked list"
+  ]
 }
