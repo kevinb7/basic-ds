@@ -4,7 +4,7 @@ var source = require('vinyl-source-stream');
 var tsc = require("gulp-tsc");
 
 function buildBrowser(sourceFile, outputName, outputLocation) {
-    return browserify({ extensions: ['.ts'], standalone: outputName })
+    browserify({ extensions: ['.ts'], standalone: outputName })
         .plugin('tsify', { target: 'ES5', removeComments: true })
         .add(sourceFile)
         .bundle()
@@ -14,7 +14,7 @@ function buildBrowser(sourceFile, outputName, outputLocation) {
 
 function buildNode(sourceFile, outputLocation) {
     gulp.src(sourceFile)
-      .pipe(tsc({ target: 'ES5', removeComments: true }))
+      .pipe(tsc({ target: 'ES5', removeComments: true, declaration: true }))
       .pipe(gulp.dest(outputLocation))
 }
 
