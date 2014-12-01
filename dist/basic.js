@@ -192,7 +192,6 @@ var basic;
     })();
     basic.Stack = Stack;
 })(basic || (basic = {}));
-
 module.exports = basic;
 
 },{}]},{},[1])(1)

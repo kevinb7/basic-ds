@@ -18,7 +18,6 @@
   "homepage": "https://github.com/kevinb7/basic-ds",
   "devDependencies": {
     "browserify": "^6.3.3",
-    "tsify": "^0.6.3",
-    "vinyl-source-stream": "^1.0.0"
+    "typescript": "^1.3.0"
   }
 }
