@@ -86,10 +86,20 @@ module basic {
             }
         }
 
+        /**
+         * Clears the list by resetting it to its
+         * initial state.
+         */
         clear() {
             this.first = this.last = null;
         }
 
+        /**
+         * Inserts the value before refNode.
+         * Assumes that refNode is in the list.
+         * @param refNode
+         * @param value
+         */
         insertBeforeNode(refNode: ListNode<T>, value: T) {
             if (refNode === this.first) {
                 this.push_front(value);
@@ -111,19 +121,18 @@ module basic {
 //        }
 //    };
 
-        forEachNode(callback: (value: ListNode<T>) => void, _this?) {
+        forEachNode(callback: (node: ListNode<T>, index: number) => void, _this?) {
             var node = this.first;
+            var index = 0;
             while (node !== null) {
-                callback.call(_this, node);
+                callback.call(_this, node, index);
                 node = node.next;
+                index++;
             }
         }
 
-        // TODO: provide the index to the callback as well
-        forEach(callback: (value: ListNode<T>) => void, _this?) {
-            this.forEachNode(function (node) {
-                callback.call(_this, node.value);
-            }, _this);
+        forEach(callback: (value: T, index: number) => void, _this?) {
+            this.forEachNode((node, index) => callback.call(_this, node.value, index), _this);
         }
 
         nodeAtIndex(index: number) {
@@ -134,6 +143,7 @@ module basic {
                     return node;
                 }
                 i++;
+                node = node.next;
             }
             return null;
         }

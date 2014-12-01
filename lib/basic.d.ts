@@ -16,8 +16,8 @@ declare module basic {
         pop_front(): T;
         clear(): void;
         insertBeforeNode(refNode: ListNode<T>, value: T): void;
-        forEachNode(callback: (value: ListNode<T>) => void, _this?: any): void;
-        forEach(callback: (value: ListNode<T>) => void, _this?: any): void;
+        forEachNode(callback: (node: ListNode<T>, index: number) => void, _this?: any): void;
+        forEach(callback: (value: T, index: number) => void, _this?: any): void;
         nodeAtIndex(index: number): ListNode<T>;
         valueAtIndex(index: number): T;
         toArray(): T[];
