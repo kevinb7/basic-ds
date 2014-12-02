@@ -2,7 +2,7 @@
   "name": "basic-ds",
   "version": "0.0.1",
   "description": "Basic data structures for JavaScript",
-  "main": "index.js",
+  "main": "lib/basic.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha-phantomjs ./test/runner.html"
   },
