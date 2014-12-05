@@ -17,6 +17,7 @@ module basic {
         }
     }
 
+    // TODO: add a .size/.empty getters to LinkedList
     export class LinkedList<T> {
         first: ListNode<T>;
         last: ListNode<T>;

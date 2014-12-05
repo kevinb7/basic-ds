@@ -22,9 +22,6 @@ in your code which can result in an empty stack.
 
 ## Building ##
 
-The build is a little clunky.  You have to run two separate gulp commands:
-- gulp compile
-- gulp browserify
+1. npm install
+2. sh build.sh
 
-We should have a script that starts the built-in tsc watcher and then
-a gulp watcher for the browserify step.
