@@ -36,3 +36,4 @@ declare module basic {
         isEmpty: boolean;
     }
 }
+export = basic;
