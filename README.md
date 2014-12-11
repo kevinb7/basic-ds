@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kevinb7/basic-ds.svg?branch=master)](https://travis-ci.org/kevinb7/basic-ds)
+
 # basic-ds #
 
 Basic data structures for JavaScript
