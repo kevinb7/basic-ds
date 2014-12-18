@@ -87,4 +87,24 @@ describe("Stack", function () {
       expect(stack.isEmpty).to.be(false);
     });
   });
+
+  describe("toArray()", function () {
+    it("should return an array containing the items", function () {
+      stack.push(1);
+      stack.push(2);
+      var array = stack.toArray();
+      expect(array[0]).to.be(1);
+      expect(array[1]).to.be(2);
+    });
+    
+    it("should not copy the items", function () {
+      var objA = {};
+      var objB = {};
+      stack.push(objA);
+      stack.push(objB);
+      var array = stack.toArray();
+      expect(array[0]).to.be(objA);
+      expect(array[1]).to.be(objB);
+    });
+  });
 });

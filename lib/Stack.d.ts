@@ -5,6 +5,7 @@ declare class Stack<T> {
     push(item: T): void;
     pop(): T;
     peek(): T;
+    toArray(): T[];
     size: number;
     isEmpty: boolean;
 }

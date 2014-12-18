@@ -24,6 +24,10 @@ class Stack<T> {
     peek() {
         return this.items[this.items.length - 1];
     }
+    
+    toArray() {
+        return this.items.map(item => item);
+    }
 
     get size() {
         return this.items.length;
