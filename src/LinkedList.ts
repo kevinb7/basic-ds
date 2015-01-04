@@ -135,21 +135,29 @@ class LinkedList<T> {
     replaceNodeWithValues(node: ListNode<T>, values: T[]) {
         if (values.length > 0) {
             var list = LinkedList.fromArray(values);
+            list.first.prev = node.prev;
+            list.last.next = node.next;
             if (node.prev !== null) {
                 node.prev.next = list.first;
+            } else {
+                this.first = list.first;
             }
             if (node.next !== null) {
                 node.next.prev = list.last;
+            } else {
+                this.last = list.last;
             }
-            list.first.prev = node.prev;
-            list.last.next = node.next;
         } else {
             // remove the node
             if (node.prev !== null) {
                 node.prev.next = node.next;
+            } else {
+                this.first = node.next;
             }
             if (node.next !== null) {
                 node.next.prev = node.prev;
+            } else {
+                this.last = node.prev;
             }
         }
 
