@@ -12,6 +12,7 @@ declare class LinkedList<T> {
     forEachNode(callback: (node: ListNode<T>, index: number) => void, _this?: any): void;
     forEach(callback: (value: T, index: number) => void, _this?: any): void;
     nodeAtIndex(index: number): ListNode<T>;
+    replaceNodeWithValues(node: ListNode<T>, values: T[]): void;
     valueAtIndex(index: number): T;
     toArray(): T[];
     static fromArray<U>(array: U[]): LinkedList<U>;

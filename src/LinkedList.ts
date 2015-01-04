@@ -131,6 +131,30 @@ class LinkedList<T> {
         }
         return null;
     }
+    
+    replaceNodeWithValues(node: ListNode<T>, values: T[]) {
+        if (values.length > 0) {
+            var list = LinkedList.fromArray(values);
+            if (node.prev !== null) {
+                node.prev.next = list.first;
+            }
+            if (node.next !== null) {
+                node.next.prev = list.last;
+            }
+            list.first.prev = node.prev;
+            list.last.next = node.next;
+        } else {
+            // remove the node
+            if (node.prev !== null) {
+                node.prev.next = node.next;
+            }
+            if (node.next !== null) {
+                node.next.prev = node.prev;
+            }
+        }
+
+        node.prev = node.next = null;   // clear refs so the node can be gc'd
+    }
 
     valueAtIndex(index: number) {
         var node = this.nodeAtIndex(index);

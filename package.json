@@ -1,6 +1,6 @@
 {
   "name": "basic-ds",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Basic data structures for JavaScript",
   "main": "lib/basic.js",
   "scripts": {

@@ -207,6 +207,46 @@ describe("LinkedList", function () {
     });
   });
 
+  describe("replaceNodeWithValues", function () {
+    var node;
+    
+    beforeEach(function () {
+      list = basic.LinkedList.fromArray([1, 2, 3]);
+      node = list.first.next;
+    });
+    
+    it("should remove just remove the node if the list is empty", function () {
+      list.replaceNodeWithValues(node, []);
+      
+      array = list.toArray();
+      expect(array.length).to.be(2);
+      expect(array[0]).to.be(1);
+      expect(array[1]).to.be(3);
+    });
+    
+    it("should replace the node with single value", function () {
+      list.replaceNodeWithValues(node, [4]);
+
+      array = list.toArray();
+      expect(array.length).to.be(3);
+      expect(array[0]).to.be(1);
+      expect(array[1]).to.be(4);
+      expect(array[2]).to.be(3);
+    });
+    
+    it("should replace the node with multiple values", function () {
+      list.replaceNodeWithValues(node, [4, 5, 6]);
+
+      array = list.toArray();
+      expect(array.length).to.be(5);
+      expect(array[0]).to.be(1);
+      expect(array[1]).to.be(4);
+      expect(array[2]).to.be(5);
+      expect(array[3]).to.be(6);
+      expect(array[4]).to.be(3);
+    });
+  });
+
   describe("valueAtIndex", function () {
     it("should return values in the array", function () {
       list = basic.LinkedList.fromArray(["apple", "banana", "cherry"]);
