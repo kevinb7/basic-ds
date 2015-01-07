@@ -17,10 +17,14 @@
   },
   "homepage": "https://github.com/kevinb7/basic-ds",
   "devDependencies": {
+    "6to5": "^2.7.4",
+    "browserify": "^8.0.3",
     "expect.js": "^0.3.1",
+    "glob": "^4.3.2",
+    "mkdirp": "^0.5.0",
     "mocha": "^2.0.1",
     "mocha-phantomjs": "^3.5.1",
     "phantomjs": "^1.9.12",
-    "tsbuild": "git://github.com/kevinb7/tsbuild"
+    "q": "^1.1.2"
   }
 }

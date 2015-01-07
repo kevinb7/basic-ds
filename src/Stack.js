@@ -1,15 +1,11 @@
-class Stack<T> {
-    items: T[];
-
-    // delegate methods
-    poppedLastItem: (item: T) => void;
+class Stack {
 
     constructor() {
         this.items = [];
-        this.poppedLastItem = function (item: T) {};
+        this.poppedLastItem = function (item) {};
     }
 
-    push(item: T) {
+    push(item) {
         this.items.push(item);
     }
 
@@ -38,4 +34,4 @@ class Stack<T> {
     }
 }
 
-export = Stack;
+module.exports = Stack;

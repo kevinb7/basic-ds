@@ -1,16 +1,26 @@
-import ListNode = require("./ListNode");
+class ListNode {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+    
+    destroy() {
+        this.value = null;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
 
 // TODO: add a .size/.empty getters to LinkedList
-class LinkedList<T> {
-    first: ListNode<T>;
-    last: ListNode<T>;
-
+class LinkedList {
     constructor() {
         this.first = null;
         this.last = null;
     }
 
-    push_back(value: T) {
+    push_back(value) {
         var node = new ListNode(value);
         if (this.first === null && this.last === null) {
             this.first = node;
@@ -22,8 +32,8 @@ class LinkedList<T> {
         }
     }
 
-    push_front(value: T) {
-        var node = new ListNode<T>(value);
+    push_front(value) {
+        var node = new ListNode(value);
         if (this.first === null && this.last === null) {
             this.first = node;
             this.last = node;
@@ -84,11 +94,11 @@ class LinkedList<T> {
      * @param refNode
      * @param value
      */
-    insertBeforeNode(refNode: ListNode<T>, value: T) {
+    insertBeforeNode(refNode, value) {
         if (refNode === this.first) {
             this.push_front(value);
         } else {
-            var node = new ListNode<T>(value);
+            var node = new ListNode(value);
             node.prev = refNode.prev;
             node.next = refNode;
             refNode.prev.next = node;
@@ -105,7 +115,7 @@ class LinkedList<T> {
 //        }
 //    };
 
-    forEachNode(callback: (node: ListNode<T>, index: number) => void, _this?) {
+    forEachNode(callback, _this) {
         var node = this.first;
         var index = 0;
         while (node !== null) {
@@ -115,11 +125,11 @@ class LinkedList<T> {
         }
     }
 
-    forEach(callback: (value: T, index: number) => void, _this?) {
+    forEach(callback, _this) {
         this.forEachNode((node, index) => callback.call(_this, node.value, index), _this);
     }
 
-    nodeAtIndex(index: number) {
+    nodeAtIndex(index) {
         var i = 0;
         var node = this.first;
         while (node !== null) {
@@ -132,7 +142,7 @@ class LinkedList<T> {
         return null;
     }
     
-    replaceNodeWithValues(node: ListNode<T>, values: T[]) {
+    replaceNodeWithValues(node, values) {
         if (values.length > 0) {
             var list = LinkedList.fromArray(values);
             list.first.prev = node.prev;
@@ -164,13 +174,13 @@ class LinkedList<T> {
         node.prev = node.next = null;   // clear refs so the node can be gc'd
     }
 
-    valueAtIndex(index: number) {
+    valueAtIndex(index) {
         var node = this.nodeAtIndex(index);
         return node ? node.value : undefined;
     }
 
     toArray() {
-        var array:T[] = [];
+        var array = [];
         var node = this.first;
         while (node !== null) {
             array.push(node.value);
@@ -179,8 +189,8 @@ class LinkedList<T> {
         return array;
     }
 
-    static fromArray<U> (array: U[]) {
-        var list = new LinkedList<U>();
+    static fromArray(array) {
+        var list = new LinkedList();
         array.forEach(function (value) {
             list.push_back(value);
         });
@@ -188,4 +198,4 @@ class LinkedList<T> {
     }
 }
 
-export = LinkedList;
+module.exports = LinkedList;
