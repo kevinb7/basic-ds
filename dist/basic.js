@@ -7,15 +7,15 @@ exports.Stack = require("./Stack");
 "use strict";
 
 var ListNode = function ListNode(value) {
-  this.value = value;
-  this.next = null;
-  this.prev = null;
+    this.value = value;
+    this.next = null;
+    this.prev = null;
 };
 
 ListNode.prototype.destroy = function () {
-  this.value = null;
-  this.prev = null;
-  this.next = null;
+    this.value = null;
+    this.prev = null;
+    this.next = null;
 };
 
 
@@ -23,68 +23,68 @@ ListNode.prototype.destroy = function () {
 
 // TODO: add a .size/.empty getters to LinkedList
 var LinkedList = function LinkedList() {
-  this.first = null;
-  this.last = null;
+    this.first = null;
+    this.last = null;
 };
 
 LinkedList.prototype.push_back = function (value) {
-  var node = new ListNode(value);
-  if (this.first === null && this.last === null) {
-    this.first = node;
-    this.last = node;
-  } else {
-    node.prev = this.last;
-    this.last.next = node;
-    this.last = node;
-  }
+    var node = new ListNode(value);
+    if (this.first === null && this.last === null) {
+        this.first = node;
+        this.last = node;
+    } else {
+        node.prev = this.last;
+        this.last.next = node;
+        this.last = node;
+    }
 };
 
 LinkedList.prototype.push_front = function (value) {
-  var node = new ListNode(value);
-  if (this.first === null && this.last === null) {
-    this.first = node;
-    this.last = node;
-  } else {
-    node.next = this.first;
-    this.first.prev = node;
-    this.first = node;
-  }
+    var node = new ListNode(value);
+    if (this.first === null && this.last === null) {
+        this.first = node;
+        this.last = node;
+    } else {
+        node.next = this.first;
+        this.first.prev = node;
+        this.first = node;
+    }
 };
 
 LinkedList.prototype.pop_back = function () {
-  if (this.last) {
-    var value = this.last.value;
-    if (this.last.prev) {
-      var last = this.last;
-      this.last = last.prev;
-      this.last.next = null;
-      last.destroy();
+    if (this.last) {
+        var value = this.last.value;
+        if (this.last.prev) {
+            var last = this.last;
+            this.last = last.prev;
+            this.last.next = null;
+            last.destroy();
+        } else {
+            this.last = null;
+            this.first = null;
+        }
+        return value;
     } else {
-      this.last = null;
-      this.first = null;
+        return null;
     }
-    return value;
-  } else {
-    return null;
-  }
 };
 
 LinkedList.prototype.pop_front = function () {
-  if (this.first) {
-    var value = this.first.value;
-    if (this.first.next) {
-      var first = this.first;
-      this.first = first.next;
-      this.first.prev = null;
-      first.destroy();
+    if (this.first) {
+        var value = this.first.value;
+        if (this.first.next) {
+            var first = this.first;
+            this.first = first.next;
+            this.first.prev = null;
+            first.destroy();
+        } else {
+            this.first = null;
+            this.last = null;
+        }
+        return value;
     } else {
-      this.first = null;
-      this.last = null;
+        return null;
     }
-    return value;
-  } else {
-    return null;
-  }
 };
 
 /**
@@ -92,7 +92,7 @@ LinkedList.prototype.pop_front = function () {
  * initial state.
  */
 LinkedList.prototype.clear = function () {
-  this.first = this.last = null;
+    this.first = this.last = null;
 };
 
 /**
@@ -102,15 +102,15 @@ LinkedList.prototype.clear = function () {
  * @param value
  */
 LinkedList.prototype.insertBeforeNode = function (refNode, value) {
-  if (refNode === this.first) {
-    this.push_front(value);
-  } else {
-    var node = new ListNode(value);
-    node.prev = refNode.prev;
-    node.next = refNode;
-    refNode.prev.next = node;
-    refNode.prev = node;
-  }
+    if (refNode === this.first) {
+        this.push_front(value);
+    } else {
+        var node = new ListNode(value);
+        node.prev = refNode.prev;
+        node.next = refNode;
+        refNode.prev.next = node;
+        refNode.prev = node;
+    }
 };
 
 // TODO: finish this
@@ -123,87 +123,87 @@ LinkedList.prototype.insertBeforeNode = function (refNode, value) {
 //    };
 
 LinkedList.prototype.forEachNode = function (callback, _this) {
-  var node = this.first;
-  var index = 0;
-  while (node !== null) {
-    callback.call(_this, node, index);
-    node = node.next;
-    index++;
-  }
+    var node = this.first;
+    var index = 0;
+    while (node !== null) {
+        callback.call(_this, node, index);
+        node = node.next;
+        index++;
+    }
 };
 
 LinkedList.prototype.forEach = function (callback, _this) {
-  this.forEachNode(function (node, index) {
-    return callback.call(_this, node.value, index);
-  }, _this);
+    this.forEachNode(function (node, index) {
+        return callback.call(_this, node.value, index);
+    }, _this);
 };
 
 LinkedList.prototype.nodeAtIndex = function (index) {
-  var i = 0;
-  var node = this.first;
-  while (node !== null) {
-    if (index === i) {
-      return node;
+    var i = 0;
+    var node = this.first;
+    while (node !== null) {
+        if (index === i) {
+            return node;
+        }
+        i++;
+        node = node.next;
     }
-    i++;
-    node = node.next;
-  }
-  return null;
+    return null;
 };
 
 LinkedList.prototype.replaceNodeWithValues = function (node, values) {
-  if (values.length > 0) {
-    var list = LinkedList.fromArray(values);
-    list.first.prev = node.prev;
-    list.last.next = node.next;
-    if (node.prev !== null) {
-      node.prev.next = list.first;
+    if (values.length > 0) {
+        var list = LinkedList.fromArray(values);
+        list.first.prev = node.prev;
+        list.last.next = node.next;
+        if (node.prev !== null) {
+            node.prev.next = list.first;
+        } else {
+            this.first = list.first;
+        }
+        if (node.next !== null) {
+            node.next.prev = list.last;
+        } else {
+            this.last = list.last;
+        }
     } else {
-      this.first = list.first;
+        // remove the node
+        if (node.prev !== null) {
+            node.prev.next = node.next;
+        } else {
+            this.first = node.next;
+        }
+        if (node.next !== null) {
+            node.next.prev = node.prev;
+        } else {
+            this.last = node.prev;
+        }
     }
-    if (node.next !== null) {
-      node.next.prev = list.last;
-    } else {
-      this.last = list.last;
-    }
-  } else {
-    // remove the node
-    if (node.prev !== null) {
-      node.prev.next = node.next;
-    } else {
-      this.first = node.next;
-    }
-    if (node.next !== null) {
-      node.next.prev = node.prev;
-    } else {
-      this.last = node.prev;
-    }
-  }
 
-  node.prev = node.next = null; // clear refs so the node can be gc'd
+    node.prev = node.next = null; // clear refs so the node can be gc'd
 };
 
 LinkedList.prototype.valueAtIndex = function (index) {
-  var node = this.nodeAtIndex(index);
-  return node ? node.value : undefined;
+    var node = this.nodeAtIndex(index);
+    return node ? node.value : undefined;
 };
 
 LinkedList.prototype.toArray = function () {
-  var array = [];
-  var node = this.first;
-  while (node !== null) {
-    array.push(node.value);
-    node = node.next;
-  }
-  return array;
+    var array = [];
+    var node = this.first;
+    while (node !== null) {
+        array.push(node.value);
+        node = node.next;
+    }
+    return array;
 };
 
 LinkedList.fromArray = function (array) {
-  var list = new LinkedList();
-  array.forEach(function (value) {
-    list.push_back(value);
-  });
-  return list;
+    var list = new LinkedList();
+    array.forEach(function (value) {
+        list.push_back(value);
+    });
+    return list;
 };
 
 module.exports = LinkedList;
@@ -211,50 +211,50 @@ module.exports = LinkedList;
 "use strict";
 
 var _prototypeProperties = function (child, staticProps, instanceProps) {
-  if (staticProps) Object.defineProperties(child, staticProps);
-  if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
+    if (staticProps) Object.defineProperties(child, staticProps);
+    if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
 };
 
 var Stack = function Stack() {
-  this.items = [];
-  this.poppedLastItem = function (item) {};
+    this.items = [];
+    this.poppedLastItem = function (item) {};
 };
 
 Stack.prototype.push = function (item) {
-  this.items.push(item);
+    this.items.push(item);
 };
 
 Stack.prototype.pop = function () {
-  var item = this.items.pop();
-  if (this.isEmpty) {
-    this.poppedLastItem(item);
-  }
-  return item;
+    var item = this.items.pop();
+    if (this.isEmpty) {
+        this.poppedLastItem(item);
+    }
+    return item;
 };
 
 Stack.prototype.peek = function () {
-  return this.items[this.items.length - 1];
+    return this.items[this.items.length - 1];
 };
 
 Stack.prototype.toArray = function () {
-  return this.items.map(function (item) {
-    return item;
-  });
+    return this.items.map(function (item) {
+        return item;
+    });
 };
 
 _prototypeProperties(Stack, null, {
-  size: {
-    get: function () {
-      return this.items.length;
+    size: {
+        get: function () {
+            return this.items.length;
+        },
+        enumerable: true
     },
-    enumerable: true
-  },
-  isEmpty: {
-    get: function () {
-      return this.items.length === 0;
-    },
-    enumerable: true
-  }
+    isEmpty: {
+        get: function () {
+            return this.items.length === 0;
+        },
+        enumerable: true
+    }
 });
 
 module.exports = Stack;
